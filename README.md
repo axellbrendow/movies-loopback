@@ -1,6 +1,10 @@
 # movies-loopback
 Loopback project using IMDb (Internet Movies Database). This is a POC (Proof of concept) project.
 
-## Class diagrams
+## Use cases
 
-![Class diagrams](./class_diagrams.svg)
+![Use cases diagram](./use_cases_diagram.svg)
+
+## Classes diagrams
+
+![Classes diagram](./classes_diagram.svg)
