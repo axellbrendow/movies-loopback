@@ -22,6 +22,7 @@
     "eslint": "lb-eslint --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run clean && npm run build",
+    "test": "mocha --recursive \"dist/test\"",
     "posttest": "npm run lint",
     "docker:build": "docker build -t movies .",
     "docker:run": "docker run -p 3000:3000 -d movies",
@@ -54,11 +55,13 @@
   },
   "devDependencies": {
     "@loopback/build": "^5.4.3",
-    "source-map-support": "^0.5.19",
-    "@loopback/testlab": "^3.1.7",
-    "@types/node": "^10.17.26",
     "@loopback/eslint-config": "^8.0.1",
+    "@loopback/testlab": "^3.1.7",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^10.17.26",
     "eslint": "^7.2.0",
+    "mocha": "^8.0.1",
+    "source-map-support": "^0.5.19",
     "typescript": "~3.9.5"
   }
 }
