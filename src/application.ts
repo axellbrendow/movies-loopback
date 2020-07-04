@@ -1,5 +1,10 @@
+import {AuthenticationComponent} from '@loopback/authentication';
+import {
+  AuthorizationComponent,
+  AuthorizationTags,
+} from '@loopback/authorization';
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
@@ -9,6 +14,7 @@ import {
 import {ServiceMixin} from '@loopback/service-proxy';
 import multer from 'multer';
 import path from 'path';
+import {JWTAuthenticationStrategy} from './authentication-strategies/jwt-strategy';
 import {
   PasswordHasherBindings,
   StorageServiceBindings,
@@ -17,6 +23,7 @@ import {
   UserServiceBindings,
 } from './keys';
 import {MySequence} from './sequence';
+import {MyAuthorizationProvider} from './services/basic.authorizor';
 import {BcryptHasher} from './services/hash.password.bcryptjs';
 import {JWTService} from './services/jwt-service';
 import {MyUserService} from './services/user-service';
@@ -30,6 +37,16 @@ export class MoviesApplication extends BootMixin(
     super(options);
 
     this.setUpBindings();
+
+    this.component(AuthenticationComponent);
+    this.component(AuthorizationComponent);
+
+    // authentication
+    this.add(createBindingFromClass(JWTAuthenticationStrategy));
+
+    this.bind('authorizationProviders.basic')
+      .toProvider(MyAuthorizationProvider)
+      .tag(AuthorizationTags.AUTHORIZER);
 
     // Set up the custom sequence
     this.sequence(MySequence);
