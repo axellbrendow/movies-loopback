@@ -1,5 +1,4 @@
-import {ApplicationConfig} from '@loopback/core';
-import {MoviesApplication} from './application';
+import {ApplicationConfig, MoviesApplication} from '.';
 
 /**
  * Export the OpenAPI spec from the application
