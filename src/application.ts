@@ -22,6 +22,14 @@ import {
   TokenServiceConstants,
   UserServiceBindings,
 } from './keys';
+import {
+  MovieRepository,
+  PermissionRepository,
+  RatingRepository,
+  RoleRepository,
+  UserRepository,
+  UserRoleRepository,
+} from './repositories';
 import {MySequence} from './sequence';
 import {MyAuthorizationProvider} from './services/basic.authorizor';
 import {BcryptHasher} from './services/hash.password.bcryptjs';
@@ -115,5 +123,31 @@ export class MoviesApplication extends BootMixin(
     this.configure(StorageServiceBindings.FILE_UPLOAD_SERVICE).to(
       multerOptions,
     );
+  }
+
+  public async seed() {
+    const roleRepository = await this.getRepository(RoleRepository);
+    const permissionRepository = await this.getRepository(PermissionRepository);
+    const movieRepository = await this.getRepository(MovieRepository);
+    const ratingRepository = await this.getRepository(RatingRepository);
+    const userRepository = await this.getRepository(UserRepository);
+    const userRoleRepository = await this.getRepository(UserRoleRepository);
+    // const userPermissionRepository = await this.getRepository(
+    //   UserPermissionRepository,
+    // );
+    // const userRoleRepository = await this.getRepository(UserRoleRepository);
+    // const rolePermissionRepository = await this.getRepository(
+    //   RolePermissionRepository,
+    // );
+
+    await Promise.all([
+      roleRepository.seed(),
+      permissionRepository.seed(),
+      movieRepository.seed(),
+      ratingRepository.seed(),
+      userRepository.seed(),
+    ]);
+
+    await Promise.all([userRoleRepository.seed()]);
   }
 }
