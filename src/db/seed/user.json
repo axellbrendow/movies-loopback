@@ -1,0 +1,14 @@
+[
+  {
+    "firstName": "user1first",
+    "lastName": "user1last",
+    "email": "email1@gmail.com",
+    "password": "password1"
+  },
+  {
+    "firstName": "user2first",
+    "lastName": "user2last",
+    "email": "email2@gmail.com",
+    "password": "password2"
+  }
+]
