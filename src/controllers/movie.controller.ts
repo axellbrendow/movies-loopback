@@ -7,7 +7,7 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where
+  Where,
 } from '@loopback/repository';
 import {
   del,
@@ -20,7 +20,7 @@ import {
   Request,
   requestBody,
   Response,
-  RestBindings
+  RestBindings,
 } from '@loopback/rest';
 import {StorageServiceBindings} from '../keys';
 import {Movie} from '../models';
@@ -79,21 +79,21 @@ export class MovieController {
   })
   async createPhoto(
     @inject(RestBindings.Http.RESPONSE) response: Response,
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(Movie, {
-            title: 'NewMovie',
-          }),
-        },
-      },
-    })
-    movie: Movie,
+    // @requestBody({
+    //   content: {
+    //     'application/json': {
+    //       schema: getModelSchemaRef(Movie, {
+    //         title: 'NewMovie',
+    //       }),
+    //     },
+    //   },
+    // })
+    // movie: Movie,
     @requestBody.file()
     request: Request,
   ) {
     console.log('REQUEST', request);
-    console.log('MOVIE', movie);
+    // console.log('MOVIE', movie);
     // return new Promise<Movie>((resolve, reject) => {
     //   this.handler(request, response, (err: unknown) => {
     //     if (err) reject(err);
